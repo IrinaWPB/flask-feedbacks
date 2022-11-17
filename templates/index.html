@@ -1,0 +1,18 @@
+{% extends 'base.html'  %}
+
+{% block title %} 
+Feedbacks
+{% endblock %}
+{% block content %}
+
+<div>
+    {% for feedback in feedbacks %}
+        <div>
+            <h3>{{feedback.title}}</h3>
+            <p>{{feedback.content}}</p>
+            <p><i>by {{feedback.username}}</i></p>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

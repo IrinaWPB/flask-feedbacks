@@ -1,0 +1,46 @@
+<html>
+
+<head>
+  <title>{% block title %} {% endblock %}</title>
+  <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css">
+   
+</head>
+
+<body>
+  <nav class="navbar navbar-light bg-primary justify-content-between ">
+    <div class="container">
+      <a href="/" class="navbar-brand text-light">Feedbacks</a>
+      <ul class="nav navbar-nav flex-row float-right">
+        {% if session['username'] %}
+        <li class="nav-item">
+          <li class="nav-item">
+            <form action="/logout" method="POST">
+               <a href="/users/{{session['username']}}" style="color:white">{{session['username']}} </a><button>Logout</button>
+            </form>
+          </li>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link pr-3 text-light" href="/login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light" href="/register">Sign up</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container" style="margin-top: 2em">
+    {% for category, msg in get_flashed_messages(with_categories=True) %}
+    <div class="alert alert-{{category}}">{{ msg }}</div>
+    {% endfor %}
+
+    {% block content %}
+    {% endblock %}
+  </div>
+
+</body>
+
+</html>
